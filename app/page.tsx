@@ -1,11 +1,11 @@
 import { Store01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import Link from "next/link"
 import { Suspense } from "react"
 
+import { EvaluationLoadingDialog } from "@/components/evaluation-loading-dialog"
 import { LandingSkeleton } from "@/components/landing-skeleton"
+import { WelcomeDialog } from "@/components/welcome-dialog"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -59,6 +59,8 @@ async function Landing({
     : "/evaluate"
 
   return (
+    <>
+    <WelcomeDialog branch={branch} />
     <Card className="w-full max-w-md">
       <CardHeader>
         <div className="mb-1 flex size-12 items-center justify-center rounded-2xl bg-muted text-foreground">
@@ -91,15 +93,9 @@ async function Landing({
         </div>
       </CardContent>
       <CardFooter className="border-t">
-        <Button
-          className="h-12 w-full text-base"
-          size="lg"
-          nativeButton={false}
-          render={<Link href={startHref} />}
-        >
-          Start evaluation
-        </Button>
+        <EvaluationLoadingDialog href={startHref} />
       </CardFooter>
     </Card>
+    </>
   )
 }
